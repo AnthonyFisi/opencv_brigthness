@@ -51,12 +51,13 @@ struct DetectionResult *detect_edges(char *str) {
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 bool process_image(
-    char *path
+    char *path,
+    float contrast
 ) {
     cv::Mat mat = cv::imread(path);
 
     cv::Mat resizedMat = ImageProcessor::process_image(
-        mat
+        mat,contrast
     );
 
 

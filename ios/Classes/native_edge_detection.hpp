@@ -24,5 +24,6 @@ struct DetectionResult *detect_edges(char *str);
 
 extern "C"
 bool process_image(
-    char* path
+    char* path,
+    float contrast
 );

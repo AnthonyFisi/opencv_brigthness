@@ -56,11 +56,13 @@ typedef DetectEdgesFunction = Pointer<NativeDetectionResult> Function(
     );
 
 typedef process_image_function = Int8 Function(
-    Pointer<Utf8> imagePath
+    Pointer<Utf8> imagePath,
+    Double contrast
     );
 
 typedef ProcessImageFunction = int Function(
-    Pointer<Utf8> imagePath
+    Pointer<Utf8> imagePath,
+    double contrast
     );
 
 // https://github.com/dart-lang/samples/blob/master/ffi/structs/structs.dart
@@ -91,7 +93,7 @@ class EdgeDetection {
     );
   }
 
-  static Future<bool> processImage(String path, EdgeDetectionResult result) async {
+  static Future<bool> processImage(String path, double contrast) async {
     DynamicLibrary nativeEdgeDetection = _getDynamicLibrary();
 
     final processImage = nativeEdgeDetection
@@ -100,7 +102,8 @@ class EdgeDetection {
 
 
     return processImage(
-        path.toNativeUtf8()
+        path.toNativeUtf8(),
+        contrast
     ) == 1;
   }
 
