@@ -56,27 +56,11 @@ typedef DetectEdgesFunction = Pointer<NativeDetectionResult> Function(
     );
 
 typedef process_image_function = Int8 Function(
-    Pointer<Utf8> imagePath,
-    Double topLeftX,
-    Double topLeftY,
-    Double topRightX,
-    Double topRightY,
-    Double bottomLeftX,
-    Double bottomLeftY,
-    Double bottomRightX,
-    Double bottomRightY
+    Pointer<Utf8> imagePath
     );
 
 typedef ProcessImageFunction = int Function(
-    Pointer<Utf8> imagePath,
-    double topLeftX,
-    double topLeftY,
-    double topRightX,
-    double topRightY,
-    double bottomLeftX,
-    double bottomLeftY,
-    double bottomRightX,
-    double bottomRightY
+    Pointer<Utf8> imagePath
     );
 
 // https://github.com/dart-lang/samples/blob/master/ffi/structs/structs.dart
@@ -116,15 +100,7 @@ class EdgeDetection {
 
 
     return processImage(
-        path.toNativeUtf8(),
-        result.topLeft.dx,
-        result.topLeft.dy,
-        result.topRight.dx,
-        result.topRight.dy,
-        result.bottomLeft.dx,
-        result.bottomLeft.dy,
-        result.bottomRight.dx,
-        result.bottomRight.dy
+        path.toNativeUtf8()
     ) == 1;
   }
 

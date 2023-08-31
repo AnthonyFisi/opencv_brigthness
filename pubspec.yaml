@@ -1,7 +1,7 @@
 name: opencv_brightness
 description: A new Flutter project.
-version: 0.0.1
-homepage:
+version: 0.0.2
+homepage: https://github.com/AnthonyFisi/opencv_brigthness.git
 
 environment:
   sdk: '>=3.0.6 <4.0.0'

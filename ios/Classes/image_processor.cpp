@@ -10,13 +10,13 @@ Point2f computePoint(int p1, int p2) {
     return pt;
 }
 
-Mat ImageProcessor::process_image (Mat img, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
+Mat ImageProcessor::process_image (Mat img) {
     //cvtColor(img, img, COLOR_BGR2GRAY);
-    Mat dst = ImageProcessor::crop_and_transform(img, x1, y1, x2, y2, x3, y3, x4, y4);
+    //Mat dst = ImageProcessor::crop_and_transform(img, x1, y1, x2, y2, x3, y3, x4, y4);
     //adaptiveThreshold(dst, dst, 255, cv::ADAPTIVE_THRESH_MEAN_C, cv::THRESH_BINARY, 53, 10);
 
     Mat imageContrastHigh2;
-    dst.convertTo(imageContrastHigh2, -1, 2, 0); //increase the contrast by 2
+    img.convertTo(imageContrastHigh2, -1, 2, 0); //increase the contrast by 2
 
     return imageContrastHigh2;
     //return dst;

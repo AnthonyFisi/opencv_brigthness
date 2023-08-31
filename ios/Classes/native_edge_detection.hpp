@@ -24,13 +24,5 @@ struct DetectionResult *detect_edges(char *str);
 
 extern "C"
 bool process_image(
-    char* path,
-    double topLeftX,
-    double topLeftY,
-    double topRightX,
-    double topRightY,
-    double bottomLeftX,
-    double bottomLeftY,
-    double bottomRightX,
-    double bottomRightY
+    char* path
 );
