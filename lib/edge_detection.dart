@@ -57,12 +57,26 @@ typedef DetectEdgesFunction = Pointer<NativeDetectionResult> Function(
 
 typedef process_image_function = Int8 Function(
     Pointer<Utf8> imagePath,
-    Double contrast
+    Double topLeftX,
+    Double topLeftY,
+    Double topRightX,
+    Double topRightY,
+    Double bottomLeftX,
+    Double bottomLeftY,
+    Double bottomRightX,
+    Double bottomRightY
     );
 
 typedef ProcessImageFunction = int Function(
     Pointer<Utf8> imagePath,
-    double contrast
+    double topLeftX,
+    double topLeftY,
+    double topRightX,
+    double topRightY,
+    double bottomLeftX,
+    double bottomLeftY,
+    double bottomRightX,
+    double bottomRightY
     );
 
 // https://github.com/dart-lang/samples/blob/master/ffi/structs/structs.dart
@@ -93,7 +107,7 @@ class EdgeDetection {
     );
   }
 
-  static Future<bool> processImage(String path, double contrast) async {
+  static Future<bool> processImage(String path, EdgeDetectionResult result) async {
     DynamicLibrary nativeEdgeDetection = _getDynamicLibrary();
 
     final processImage = nativeEdgeDetection
@@ -103,9 +117,38 @@ class EdgeDetection {
 
     return processImage(
         path.toNativeUtf8(),
-        contrast
+        result.topLeft.dx,
+        result.topLeft.dy,
+        result.topRight.dx,
+        result.topRight.dy,
+        result.bottomLeft.dx,
+        result.bottomLeft.dy,
+        result.bottomRight.dx,
+        result.bottomRight.dy
     ) == 1;
   }
+
+  static Future<bool> processImageLight(String path, EdgeDetectionResult result) async {
+    DynamicLibrary nativeEdgeDetection = _getDynamicLibrary();
+
+    final processImage = nativeEdgeDetection
+        .lookup<NativeFunction<process_image_function>>("process_image_light")
+        .asFunction<ProcessImageFunction>();
+
+
+    return processImage(
+        path.toNativeUtf8(),
+        result.topLeft.dx,
+        result.topLeft.dy,
+        result.topRight.dx,
+        result.topRight.dy,
+        result.bottomLeft.dx,
+        result.bottomLeft.dy,
+        result.bottomRight.dx,
+        result.bottomRight.dy
+    ) == 1;
+  }
+
 
   static DynamicLibrary _getDynamicLibrary() {
     final DynamicLibrary nativeEdgeDetection = Platform.isAndroid

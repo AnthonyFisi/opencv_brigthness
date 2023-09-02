@@ -53,11 +53,58 @@ extern "C" __attribute__((visibility("default"))) __attribute__((used))
 bool process_image(
     char *path,
     float contrast
+    double topLeftX,
+    double topLeftY,
+    double topRightX,
+    double topRightY,
+    double bottomLeftX,
+    double bottomLeftY,
+    double bottomRightX,
+    double bottomRightY
 ) {
     cv::Mat mat = cv::imread(path);
 
     cv::Mat resizedMat = ImageProcessor::process_image(
-        mat,contrast
+        mat,
+        topLeftX * mat.size().width,
+        topLeftY * mat.size().height,
+        topRightX * mat.size().width,
+        topRightY * mat.size().height,
+        bottomLeftX * mat.size().width,
+        bottomLeftY * mat.size().height,
+         bottomRightX * mat.size().width,
+         bottomRightY * mat.size().height
+    );
+
+
+    return cv::imwrite(path, resizedMat);
+}
+
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+bool process_image_light(
+    char *path,
+    double topLeftX,
+    double topLeftY,
+    double topRightX,
+    double topRightY,
+    double bottomLeftX,
+    double bottomLeftY,
+    double bottomRightX,
+    double bottomRightY
+) {
+    cv::Mat mat = cv::imread(path);
+
+    cv::Mat resizedMat = ImageProcessor::process_image_light(
+        mat,
+        topLeftX * mat.size().width,
+        topLeftY * mat.size().height,
+        topRightX * mat.size().width,
+        topRightY * mat.size().height,
+        bottomLeftX * mat.size().width,
+        bottomLeftY * mat.size().height,
+         bottomRightX * mat.size().width,
+         bottomRightY * mat.size().height
     );
 
 
