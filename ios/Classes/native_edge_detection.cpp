@@ -52,7 +52,6 @@ struct DetectionResult *detect_edges(char *str) {
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 bool process_image(
     char *path,
-    float contrast
     double topLeftX,
     double topLeftY,
     double topRightX,
