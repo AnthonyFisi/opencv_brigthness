@@ -17,7 +17,7 @@ Mat ImageProcessor::process_image (Mat img, float x1, float y1, float x2, float 
     //adaptiveThreshold(dst, dst, 255, cv::ADAPTIVE_THRESH_MEAN_C, cv::THRESH_BINARY, 53, 10);
 
     Mat imageContrastHigh2;
-    img.convertTo(imageContrastHigh2, -1, contrast , 0); //increase the contrast by 2
+    img.convertTo(imageContrastHigh2, -1, 2 , 0); //increase the contrast by 2
 
     return imageContrastHigh2;
     //return dst;
